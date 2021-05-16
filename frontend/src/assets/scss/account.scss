@@ -1,0 +1,86 @@
+@import "./base/styling.module";
+
+.settings{
+  &-main-container{
+    background-color: #ffffff;
+    border-radius: 6px;
+    margin: 3rem 11rem;
+    padding: 1rem 2rem;
+  }
+  &-header{
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+    span{
+      @include fontStyle(1.2rem,500,#262626);
+    }
+  }
+  &-info,&-noti,&-disable{
+    &-header{
+      padding: 1rem 0;
+      border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+      span{
+        @include fontStyle(1.6rem,500,#d4d4d4);
+      }
+    }
+    &-profile,&-name,&-email,&-password{
+      span{
+        text-transform: capitalize;
+        @include fontStyle(1.2rem,normal,#262626);
+      }
+      &-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+        border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+      }
+      &-header{
+        span{
+          text-transform: capitalize;
+          @include fontStyle(1.2rem,normal,#676767)
+        }
+      }
+      &-img{
+        img{
+          height: 3rem;
+        }
+      }
+    }
+    &-profile-container{
+      padding: 1.5rem 0;
+    }
+    &-password-container{
+      border: 0;
+      margin-bottom: 2rem;
+    }
+  }
+  &-button{
+    cursor: pointer;
+    margin: 3rem auto !important;
+    @include button(18rem,3rem, #f56f6f,#fff,1.5rem);
+  }
+  &-skill-header{
+    flex: 1;
+      span{
+        @include fontStyle(1.2rem,normal,#676767)
+      }
+  }
+  &-card{
+    border: solid 1px #e8e8e8;
+    border-radius: 4px;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    span{
+      text-transform: capitalize;
+      @include fontStyle(1.2rem,normal,#676767);
+    }
+    &-container{
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap:0.5rem;
+    }
+  }
+}

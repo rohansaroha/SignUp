@@ -1,0 +1,44 @@
+@import "styling.module";
+
+
+.main{
+  display: flex;
+  align-items: center;
+}
+.plus,.minus{
+  cursor: pointer;
+  background-color: #daebff;
+  border: solid 1px #2654b4;
+  width: 1.8rem;
+  height: $buttonHeight;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  span{
+    @include fontStyle(1.3rem,500,#2654b4)
+  }
+}
+.plus{
+  border-radius: 0 2px 2px 0;
+  border-left: 0;
+}
+.minus{
+  border-radius: 2px 0 0 2px;
+  border-right: 0;
+}
+.qty{
+  width: 2rem;
+  height: $buttonHeight;
+  display: flex;
+  justify-content: center;
+  border: solid 1px #2654b4;
+  border-right: 0;
+  border-left: 0;
+  text-align: center;
+  background-color: #faf7f7;
+  span{
+    @include fontStyle(1.2rem,normal,#2654b4);
+  }
+}
+
+

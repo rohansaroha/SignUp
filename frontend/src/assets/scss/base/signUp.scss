@@ -1,0 +1,78 @@
+@import "./styling.module";
+
+.signIn{
+  &-content-container{
+    width: 40vw;
+    background-color: white;
+    border: 1px solid #596cd7;
+    border-radius: 40px;
+    padding: 4rem;
+    box-shadow: 0 0 24px 0px;
+  }
+  &-main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(45deg, #3f51b5 0%,#7986cb 100%)
+  }
+  &-header{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    span{
+      @include fontStyle(2rem,500,#262626);
+    }
+  }
+  &-email{
+    &-container{
+      margin: 1rem 0;
+    }
+    &-header{
+      padding: 0.25rem 0.5rem;
+      span{
+        @include fontStyle(0.875rem,500,#262626);
+      }
+    }
+  }
+  &-password{
+    &-container{
+      margin: 0.5rem 0;
+    }
+    &-header{
+      padding: 0.25rem 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      &-primary{
+        @include fontStyle(0.875rem,500,#262626);
+      }
+      &-secondary{
+        @include fontStyle(0.875rem,500,#2766cc);
+      }
+    }
+  }
+  &-button{
+    border-radius: 4.5px;
+    height: 2.75rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #2766cc;
+    span{
+      @include fontStyle(1rem,500,#fff)
+    }
+  }
+
+  &-not-registered {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  &-register-button {
+    margin-top: 0;
+    cursor: pointer;
+  }
+}

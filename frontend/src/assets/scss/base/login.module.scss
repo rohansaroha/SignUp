@@ -1,0 +1,101 @@
+@import "./styling.module";
+
+.main{
+  margin: 0 auto;
+  background-image: url("../../images/backgroundImg.jpg");
+  background-size: cover;
+  min-height: 100vh;
+  padding-top: 5%;
+}
+.contentContainer{
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 50vw;
+  background-color: white;
+  border: 1px solid $login-border-color ;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 0 8px 0;
+}
+.header{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  span{
+    @include fontStyle(2rem,500,$header-color);
+    letter-spacing: 1.5px;
+  }
+}
+.button{
+  margin: 0 auto;
+  cursor: pointer;
+  box-sizing: border-box;
+  @include button(75%,3rem,$button-color,#ffff,1.2rem)
+}
+.pHeader{
+  display: flex;
+  justify-content: center;
+  span{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    @include fontStyle(1.2rem,normal,$header-color-secondary)
+  }
+}
+.sHeader{
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  span{
+    @include fontStyle(1rem,normal,$header-color)
+  }
+}
+.loginForm{
+  margin: 0 auto 2rem;
+  width: 85%;
+
+}
+.textField{
+  margin: 1rem 0 !important;
+  width: 100%;
+}
+
+// for mobile screen
+@media screen and (max-width: 700px){
+  .main{
+    padding-top: 20%;
+  }
+  .contentContainer{
+    width: 84vw;
+    padding: 2rem 1rem;
+  }
+  .header{
+    span{
+      @include fontStyle(1.2rem,500,$header-color);
+      letter-spacing: 1px;
+    }
+  }
+  .button{
+    @include button(75%,2.5rem,$button-color,#ffff,1.1rem)
+  }
+  .pHeader{
+    span{
+      letter-spacing: 0.5px;
+      @include fontStyle(0.9rem,normal,$header-color-secondary)
+    }
+  }
+  .sHeader{
+    margin: 1rem 0;
+    span{
+      @include fontStyle(0.9rem,normal,$header-color)
+    }
+  }
+  .loginForm{
+    margin: 0 auto 2rem;
+    width: 85%;
+
+  }
+  .textField{
+    margin: 1rem 0 !important;
+    width: 100%;
+  }
+}
