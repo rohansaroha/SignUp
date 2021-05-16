@@ -3,7 +3,6 @@ import "../assets/scss/account.scss";
 import { toast } from "react-toastify";
 import AuthServices from "../services/authServices";
 import { SkillsContext } from "../hooks/SkillsContext";
-import { NavLink } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Account = () => {
@@ -74,9 +73,9 @@ const Account = () => {
                 <div className='settings-card-container'>{renderSkills()}</div>
               </div>
             </div>
-            <NavLink to='/' className='settings-button'>
+            <div className='settings-button'>
               <span>Logout</span>
-            </NavLink>
+            </div>
           </div>
         </div>
       </div>)

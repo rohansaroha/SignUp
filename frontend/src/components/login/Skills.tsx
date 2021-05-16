@@ -27,10 +27,7 @@ const Skills = (props:any)=>{
       <div className={styles.main}>
         <div className={styles.contentContainer}>
           <div className={styles.header}>
-            <span>Select your Skills</span>
-          </div>
-          <div className={styles.pHeader}>
-            <span>You have to choose between 3-8</span>
+            <span>Select 4-8 Skills</span>
           </div>
           <SkillsSelector value={[skillsP,setSkillsP]}/>
           <div className={styles.button} onClick={Continue}>
