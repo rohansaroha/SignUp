@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/scss/account.scss";
 import { toast } from "react-toastify";
 import AuthServices from "../services/authServices";
-import { SkillsContext } from "../hooks/SkillsContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
-import { NavLink } from "react-router-dom";
 
 const Account = (props:any) => {
-  const selectedSkills = useContext(SkillsContext);
   const [loader,setLoader] = useState(true);
   const [userData, setUserData] = useState<any>({
     firstName: null,
@@ -45,7 +42,7 @@ const Account = (props:any) => {
           toast.error(err.response.data.message);
         });
     }
-  },[]);
+  },[props.location.state,props.history]);
 
   const renderSkills = ()=>{
     let skills:any[] = [];

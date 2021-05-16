@@ -36,7 +36,7 @@ const SignIn = (props:any)=>{
         }
       })
       .catch((err)=>{
-        toast.error(err.response.data.message);
+        toast.error(err.response.data.message[0]);
       });
   };
   return(
