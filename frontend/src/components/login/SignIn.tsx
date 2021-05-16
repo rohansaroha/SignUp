@@ -5,8 +5,11 @@ import { StepContext } from "../../hooks/StepContext";
 import LoginForm from "../base/LoginForm";
 import { ILogin } from "../../constants/interfaces/loginInterface";
 import AuthServices from "../../services/authServices";
+import { toast } from "react-toastify";
+import StorageService from "../../services/storageService";
+import { withRouter } from "react-router";
 
-const SignIn = ()=>{
+const SignIn = (props:any)=>{
   const [values, setValues] = useState<ILogin>({
     username: "",
     password: "",
@@ -15,9 +18,23 @@ const SignIn = ()=>{
 
   const step = useContext(StepContext);
   const signInHandler = ()=>{
-    AuthServices.SignIn(values);
-    console.log(values);
-    step[1](2);
+    AuthServices.SignIn(values)
+      .then((res)=>{
+        StorageService.setKey("token",res.data.accessToken);
+        toast.success("SignIn Successful");
+        if(!res.data.user.firstName && !res.data.user.firstName ){
+          step[1](2);
+        }
+        else if (!res.data.user.skills){
+          step[1](3);
+        }
+        else{
+          props.history.push("/home");
+        }
+      })
+      .catch((err)=>{
+        toast.error(err.response.data.message[0]);
+      });
   };
   return(
     <div className={styles.main}>
@@ -45,4 +62,4 @@ const SignIn = ()=>{
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);

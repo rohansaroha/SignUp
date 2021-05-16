@@ -56,6 +56,7 @@
     }
   }
   &-button{
+    text-decoration: none;
     cursor: pointer;
     margin: 3rem auto !important;
     @include button(18rem,3rem, #f56f6f,#fff,1.5rem);
@@ -81,6 +82,94 @@
       justify-content: flex-end;
       flex-wrap: wrap;
       gap:0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .settings{
+    &-main-container{
+      background-color: #ffffff;
+      border-radius: 6px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    &-header{
+      padding: 1rem 0;
+      margin-bottom: 1rem;
+      border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+      span{
+        @include fontStyle(1rem,500,#262626);
+      }
+    }
+    &-info,&-noti,&-disable{
+      &-header{
+        padding: 1rem 0;
+        border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+        span{
+          @include fontStyle(1.3rem,500,#d4d4d4);
+        }
+      }
+      &-profile,&-name,&-email,&-password{
+        span{
+          text-transform: capitalize;
+          @include fontStyle(1rem,normal,#262626);
+        }
+        &-container{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.5rem 0;
+          border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+        }
+        &-header{
+          span{
+            text-transform: capitalize;
+            @include fontStyle(1rem,normal,#676767)
+          }
+        }
+        &-img{
+          img{
+            height: 2rem;
+          }
+        }
+      }
+      &-profile-container{
+        padding: 1.5rem 0;
+      }
+      &-password-container{
+        border: 0;
+        margin-bottom: 2rem;
+      }
+    }
+    &-button{
+      text-decoration: none;
+      cursor: pointer;
+      margin: 3rem auto !important;
+      @include button(10rem,2.2rem, #f56f6f,#fff,1.2rem);
+    }
+    &-skill-header{
+      flex: 1;
+      span{
+        @include fontStyle(1rem,normal,#676767)
+      }
+    }
+    &-card{
+      border: solid 1px #e8e8e8;
+      border-radius: 4px;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      span{
+        text-transform: capitalize;
+        @include fontStyle(1rem,normal,#676767);
+      }
+      &-container{
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap:0.5rem;
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "./baseUrl";
+import StorageService from "./storageService";
 
 class AuthServices{
 
@@ -14,8 +15,18 @@ class AuthServices{
   }
 
   static async UserProfile(body){
+    console.log("body of user",body);
     const url = baseUrl + "/user/basic/profile";
-    const key = "as";
+    const key = StorageService.getValueFromKey("token");
+    return axios.post(url,body,{
+      headers: {
+        "Authorization": `Bearer ${key}`
+      }
+    });
+  }
+  static async getUser(body){
+    const url = baseUrl + "/user/skills";
+    const key = StorageService.getValueFromKey("token");
     return axios.post(url,body,{
       headers: {
         "Authorization": `Bearer ${key}`

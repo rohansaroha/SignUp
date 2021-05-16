@@ -4,6 +4,9 @@ import styles from "../../assets/scss/base/login.module.scss";
 import { IUser } from "../../constants/interfaces/loginInterface";
 import { StepContext } from "../../hooks/StepContext";
 import { FormControl,  Input, InputLabel } from "@material-ui/core";
+import AuthServices from "../../services/authServices";
+import { toast } from "react-toastify";
+import { withRouter } from "react-router";
 
 const UserDetails = ()=>{
   const [values, setValues] = useState<IUser>({
@@ -12,9 +15,18 @@ const UserDetails = ()=>{
   });
 
   const step = useContext(StepContext);
-  const signUpHandler = ()=>{
-    console.log(step);
-    step[1](3);
+  const continueHandler = ()=>{
+    console.log(values);
+    AuthServices.UserProfile(values)
+      .then(()=>{
+        step[1](3);
+      })
+      .catch((err)=>{
+        console.log(err.response);
+        if(err.response.data.message){
+          toast.error(err.response.data.message);
+        }
+      });
   };
   const handleChange = (prop: any) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -52,7 +64,7 @@ const UserDetails = ()=>{
               </FormControl>
             </div>
           </div>
-          <div onClick={signUpHandler}  className={styles.button}>
+          <div onClick={continueHandler}  className={styles.button}>
             <span>Continue</span>
           </div>
         </div>
@@ -61,4 +73,4 @@ const UserDetails = ()=>{
   );
 };
 
-export default UserDetails;
+export default withRouter(UserDetails);

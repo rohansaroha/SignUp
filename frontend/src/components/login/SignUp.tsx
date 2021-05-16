@@ -4,18 +4,26 @@ import styles from "../../assets/scss/base/login.module.scss";
 import LoginForm from "../base/LoginForm";
 import { ILogin } from "../../constants/interfaces/loginInterface";
 import { StepContext } from "../../hooks/StepContext";
+import AuthServices from "../../services/authServices";
+import { toast } from "react-toastify";
 
 const SignUp = ()=>{
   const [values, setValues] = useState<ILogin>({
-    email: "",
+    username: "",
     password: "",
     showPassword: false,
   });
 
   const step = useContext(StepContext);
   const signUpHandler = ()=>{
-    console.log(step);
-    step[1](0);
+    AuthServices.SignUp(values)
+      .then(()=>{
+        toast.success("SignUp Successful");
+        step[1](0);
+      })
+      .catch((err)=>{
+        toast.error(err.response.data.message[0]);
+      });
   };
   return(
     <Layout>

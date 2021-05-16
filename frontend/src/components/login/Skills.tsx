@@ -4,22 +4,21 @@ import styles from "../../assets/scss/base/login.module.scss";
 import SkillsSelector from "../base/SkillsSelector";
 import skillsServices from "../../services/skillsServices";
 import { withRouter } from "react-router";
+import { toast } from "react-toastify";
 
 const Skills = (props:any)=>{
   const [skillsP,setSkillsP] = useState<any[]>([]);
   const Continue = ()=>{
-    console.log(skillsP);
-    props.history.push("/home");
     if (skillsP.length < 4){
-      console.log("select more");
+      toast.info("Select more than 3 skills to continue");
     }
     else{
-      skillsServices.addSkills(skillsP)
-        .then((res)=>{
-          console.log(res.data);
+      skillsServices.addSkills({ "skills": skillsP })
+        .then(()=>{
+          props.history.push("/home");
         })
         .catch((err)=>{
-          console.log(err);
+          toast.error(err.response.data.message);
         });
     }
   };

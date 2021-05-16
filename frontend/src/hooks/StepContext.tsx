@@ -10,6 +10,6 @@ export const StepProvider = ({ children }:{children:React.ReactNode})=>{
 };
 
 const useProviderQty = ():any=>{
-  const [step,setStep] = useState<number>(0);
+  const [step,setStep] = useState<number>(3);
   return [step,setStep];
 };

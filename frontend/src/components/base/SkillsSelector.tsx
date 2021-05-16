@@ -4,6 +4,8 @@ import styles from "../../assets/scss/base/skillsSelector.module.scss";
 import { Chip, Paper } from "@material-ui/core";
 import skillsServices from "../../services/skillsServices";
 import clsx from "clsx";
+import Pagination from "@material-ui/lab/Pagination";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 interface ChipData {
     key: number;
@@ -12,8 +14,9 @@ interface ChipData {
 const SkillsSelector = (props:any)=>{
   const [skillsP,setSkillsP] = props.value;
   const [skills,setSkills] = useState<any[]>([]);
-  const [pageNumber,setPageNumber] = useState(2);
+  const [pageNumber,setPageNumber] = useState(1);
   const selectedSkills = useContext(SkillsContext);
+  const [loader,setLoader] = useState(true);
 
   const handleDelete = (chipToDelete: ChipData ) => () => {
     selectedSkills[1]((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
@@ -23,6 +26,7 @@ const SkillsSelector = (props:any)=>{
   useEffect(()=>{
     skillsServices.getSkills()
       .then((res)=>{
+        setLoader(false);
         setSkills(res.data);
       })
       .catch((err)=>{
@@ -56,14 +60,13 @@ const SkillsSelector = (props:any)=>{
       const skillsSelector = ()=>{
         let rawSkill;
         let rawSkillP;
-        if(skillsP.length <= 8 && !skillsP.includes(skill.skillName)){
+        if(skillsP.length < 8 && !skillsP.includes(skill.skillName)){
           rawSkill = [...selectedSkills[0],{ key: skill.id,label: skill.skillName }];
           rawSkillP = [...skillsP,skill.skillName];
           setSkillsP(rawSkillP);
           selectedSkills[1](rawSkill);
         }
-        else if (skillsP.length > 8){
-          console.log("no more");
+        else if (skillsP.length >= 8){
           return;
         }
       };
@@ -83,17 +86,22 @@ const SkillsSelector = (props:any)=>{
   };
 
   return(
-    <div>
-      <div>{renderSelectedSkills()}</div>
-      <div className={styles.skillContainer}>
-        {renderSkills()}
-      </div>
-      <div style={{ display: "flex", gap: "0.4rem" }}>
-        <div onClick={()=>setPageNumber(1)}>1</div>
-        <div onClick={()=>setPageNumber(2)}>2</div>
-        <div onClick={()=>setPageNumber(3)}>3</div>
-      </div>
-    </div>
+    loader ? (<div style={{ display: "flex",justifyContent: "center",margin: "10% 0" }}><CircularProgress/></div>)
+      : (<div>
+        <div>{renderSelectedSkills()}</div>
+        <div className={styles.skillContainer}>
+          {renderSkills()}
+        </div>
+        <div style={{ display: "flex",justifyContent: "center",margin: "3% 0" }}>
+          <Pagination count={12}
+            siblingCount={0}
+            variant="outlined" color="primary"
+            page={pageNumber}
+            onChange={(e,value)=>setPageNumber(value)}
+          />
+        </div>
+      </div>)
+
   );
 };
 export default SkillsSelector;
