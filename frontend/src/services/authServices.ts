@@ -15,7 +15,6 @@ class AuthServices{
   }
 
   static async UserProfile(body){
-    console.log("body of user",body);
     const url = baseUrl + "/user/basic/profile";
     const key = StorageService.getValueFromKey("token");
     return axios.post(url,body,{

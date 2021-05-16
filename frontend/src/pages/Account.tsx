@@ -4,8 +4,10 @@ import { toast } from "react-toastify";
 import AuthServices from "../services/authServices";
 import { SkillsContext } from "../hooks/SkillsContext";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { withRouter } from "react-router";
+import { NavLink } from "react-router-dom";
 
-const Account = () => {
+const Account = (props:any) => {
   const selectedSkills = useContext(SkillsContext);
   const [loader,setLoader] = useState(true);
   const [userData, setUserData] = useState<any>({
@@ -17,20 +19,33 @@ const Account = () => {
   });
 
   useEffect(()=>{
-    AuthServices.getUser({ "skills": selectedSkills[0] })
-      .then((res)=>{
-        setLoader(false);
-        setUserData({
-          firstName: res.data.firstName,
-          lastName: res.data.lastName,
-          email: res.data.username,
-          skills: res.data.skills
-        });
-      })
-      .catch((err)=>{
-        toast.error(err.response.data.message);
+    if (props.location.state){
+      const rawData  = props.location.state;
+      setUserData({
+        firstName: rawData.firstName,
+        lastName: rawData.lastName,
+        email: rawData.username,
+        skills: rawData.skills
       });
-  },[selectedSkills]);
+      setLoader(false);
+    }
+    else if (selectedSkills[0]){
+      AuthServices.getUser({ "skills": selectedSkills[0] })
+        .then((res)=>{
+          setLoader(false);
+          setUserData({
+            firstName: res.data.firstName,
+            lastName: res.data.lastName,
+            email: res.data.username,
+            skills: res.data.skills
+          });
+        })
+        .catch((err)=>{
+          props.history.push("/");
+          toast.error(err.response.data.message);
+        });
+    }
+  },[]);
 
   const renderSkills = ()=>{
     let skills:any[] = [];
@@ -73,13 +88,13 @@ const Account = () => {
                 <div className='settings-card-container'>{renderSkills()}</div>
               </div>
             </div>
-            <div className='settings-button'>
+            <NavLink to={"/"} className='settings-button'>
               <span>Logout</span>
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>)
   );
 };
 
-export default Account;
+export default withRouter(Account);

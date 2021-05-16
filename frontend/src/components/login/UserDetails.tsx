@@ -16,13 +16,11 @@ const UserDetails = ()=>{
 
   const step = useContext(StepContext);
   const continueHandler = ()=>{
-    console.log(values);
     AuthServices.UserProfile(values)
       .then(()=>{
         step[1](3);
       })
       .catch((err)=>{
-        console.log(err.response);
         if(err.response.data.message){
           toast.error(err.response.data.message);
         }

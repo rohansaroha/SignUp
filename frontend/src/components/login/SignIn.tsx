@@ -29,11 +29,14 @@ const SignIn = (props:any)=>{
           step[1](3);
         }
         else{
-          props.history.push("/home");
+          props.history.push({
+            pathname: "/home",
+            state: res.data.user
+          });
         }
       })
       .catch((err)=>{
-        toast.error(err.response.data.message[0]);
+        toast.error(err.response.data.message);
       });
   };
   return(
