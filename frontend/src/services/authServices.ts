@@ -23,10 +23,10 @@ class AuthServices{
       }
     });
   }
-  static async getUser(body){
-    const url = baseUrl + "/user/skills";
+  static async getUser(){
+    const url = baseUrl + "/user/profile";
     const key = StorageService.getValueFromKey("token");
-    return axios.post(url,body,{
+    return axios.get(url,{
       headers: {
         "Authorization": `Bearer ${key}`
       }

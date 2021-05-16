@@ -29,8 +29,8 @@ const Account = (props:any) => {
       });
       setLoader(false);
     }
-    else if (selectedSkills[0]){
-      AuthServices.getUser({ "skills": selectedSkills[0] })
+    else{
+      AuthServices.getUser()
         .then((res)=>{
           setLoader(false);
           setUserData({
@@ -88,9 +88,9 @@ const Account = (props:any) => {
                 <div className='settings-card-container'>{renderSkills()}</div>
               </div>
             </div>
-            <NavLink to={"/"} className='settings-button'>
+            <div  className='settings-button'>
               <span>Logout</span>
-            </NavLink>
+            </div>
           </div>
         </div>
       </div>)
