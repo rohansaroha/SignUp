@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import AuthServices from "../services/authServices";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
+import StorageService from "../services/storageService";
+import { NavLink } from "react-router-dom";
 
 const Account = (props:any) => {
   const [loader,setLoader] = useState(true);
@@ -85,9 +87,9 @@ const Account = (props:any) => {
                 <div className='settings-card-container'>{renderSkills()}</div>
               </div>
             </div>
-            <div  className='settings-button'>
+            <NavLink to = '/' onClick={()=>StorageService.clearStorage()}  className='settings-button'>
               <span>Logout</span>
-            </div>
+            </NavLink>
           </div>
         </div>
       </div>)

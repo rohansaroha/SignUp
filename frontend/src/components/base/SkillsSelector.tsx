@@ -93,7 +93,7 @@ const SkillsSelector = (props:any)=>{
           {renderSkills()}
         </div>
         <div style={{ display: "flex",justifyContent: "center",margin: "3% 0" }}>
-          <Pagination count={12}
+          <Pagination count={10}
             siblingCount={0}
             variant="outlined" color="primary"
             page={pageNumber}
