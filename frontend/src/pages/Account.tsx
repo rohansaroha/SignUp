@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/scss/account.scss";
 import { toast } from "react-toastify";
 import AuthServices from "../services/authServices";
@@ -6,8 +6,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { withRouter } from "react-router";
 import StorageService from "../services/storageService";
 import { NavLink } from "react-router-dom";
+import { StepContext } from "../hooks/StepContext";
 
 const Account = (props:any) => {
+  const step = useContext(StepContext);
   const [loader,setLoader] = useState(true);
   const [userData, setUserData] = useState<any>({
     firstName: null,
@@ -87,7 +89,7 @@ const Account = (props:any) => {
                 <div className='settings-card-container'>{renderSkills()}</div>
               </div>
             </div>
-            <NavLink to = '/' onClick={()=>StorageService.clearStorage()}  className='settings-button'>
+            <NavLink to = '/' onClick={()=>{StorageService.clearStorage();step[1](0);toast.info("Logout Successful!");}}  className='settings-button'>
               <span>Logout</span>
             </NavLink>
           </div>
