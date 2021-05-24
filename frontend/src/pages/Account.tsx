@@ -43,7 +43,12 @@ const Account = (props:any) => {
         })
         .catch((err)=>{
           props.history.push("/");
-          toast.error(err.response.data.message);
+          if(Array.isArray(err.response.data.message)){
+            toast.error(err.response.data.message[0]);
+          }
+          else{
+            toast.error(err.response.data.message);
+          }
         });
     }
   },[props.location.state,props.history]);
